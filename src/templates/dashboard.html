@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+  <h1>Your uploads</h1>
+  <p><a href="{{ url_for('texts.upload_form') }}">Upload a new text</a></p>
+
+  {% if uploads %}
+    {% for item in uploads %}
+      <div class="card">
+        <h3>{{ item.title }}</h3>
+        <small>{{ item.created_at }}</small>
+        <pre style="white-space: pre-wrap;">{{ item.body }}</pre>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No uploads yet.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Upload Text{% endblock %}
+{% block content %}
+  <h1>Upload text</h1>
+  <form method="post">
+    <label>Title</label>
+    <input type="text" name="title" required maxlength="200" />
+    <label>Text</label>
+    <textarea name="body" required></textarea>
+    <button type="submit">Upload</button>
+  </form>
+{% endblock %}
