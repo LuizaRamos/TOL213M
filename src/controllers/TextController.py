@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_login import login_required, current_user
 from src.persistences.models.Text import Text
 from src.services.implementations.UserAuthServiceImplementation import UserAuthServiceImplementation
-from src.services.implementations.TextServiceImplementaion import TextServiceImplementaion
+from src.services.implementations.TextServiceImplementation import TextServiceImplementaion
 from src.persistences.repositories.TextRepository import TextRepository
 
 text_controller = Blueprint("text_controller", __name__, template_folder="templates")
