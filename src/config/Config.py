@@ -1,16 +1,19 @@
 import os
+from pathlib import Path
+
+SRC_DIR = Path(__file__).resolve().parent
+INSTANCE_DIR = SRC_DIR / "Instance"
+
+DEFAULT_DB_PATH = INSTANCE_DIR / "app.db"
+DEFAULT_DB_URI = f"sqlite:///{DEFAULT_DB_PATH}"
 
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY")
+    SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-change-me")
 
-    # SQLite DB
-    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    DB_PATH = os.path.join(os.path.dirname(BASE_DIR), "Instance", "app.db")
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + DB_PATH
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL", DEFAULT_DB_URI)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Flask-Session (server-side)
     SESSION_TYPE = "filesystem"
-    SESSION_FILE_DIR = os.path.join(os.path.dirname(BASE_DIR), "Instance", "sessions")
+    SESSION_FILE_DIR = str(INSTANCE_DIR / "sessions")
     SESSION_PERMANENT = False
-
