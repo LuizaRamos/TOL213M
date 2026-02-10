@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from flask_login import login_required, current_user
 from src.persistences.models.Text import Text
 from src.services.implementations.UserAuthServiceImplementation import UserAuthServiceImplementation
-from src.services.implementations.TextServiceImplementation import TextServiceImplementaion
+from src.services.implementations.TextServiceImplementation import TextServiceImplementation
 from src.persistences.repositories.TextRepository import TextRepository
 
 text_controller = Blueprint("text_controller", __name__, template_folder="templates")
@@ -52,7 +52,7 @@ def upload():
         flash("Text content is required")
         return redirect(url_for("text_controller.upload"))
 
-    service = TextServiceImplementaion(master_key)
+    service = TextServiceImplementation(master_key)
     service.encrypt_and_store(user_id, title, content)
 
     flash("Encrypted text stored successfully.")
@@ -69,7 +69,17 @@ def view_text(text_id: int):
     if not text_obj:
         abort(404)
 
-    service = TextServiceImplementaion(master_key)
+    service = TextServiceImplementation(master_key)
     plaintext = service.decrypt_for_user(text_obj)
 
-    return render_template("upload.html", viewing=True, title=text_obj.title, content=plaintext)
+    return render_template(
+        "editor.html",
+        viewing=True,
+        title=text_obj.title,
+        content=plaintext
+    )
+
+@text_controller.get("/create")
+@login_required
+def create_page():
+    return render_template("editor.html", viewing=False, title="", content="")
