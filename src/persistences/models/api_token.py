@@ -2,7 +2,7 @@ from __future__ import annotations
 from datetime import datetime
 import secrets
 
-from src import db
+from src.persistences.models import db
 
 class ApiToken(db.Model):
     __tablename__ = "api_token"
@@ -12,7 +12,7 @@ class ApiToken(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=True)
 
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     user = db.relationship("User", foreign_keys=[user_id])
 
     @staticmethod

@@ -1,18 +1,79 @@
-{% extends "base.html" %}
-{% block title %}Dashboard{% endblock %}
-{% block content %}
-  <h1>Your uploads</h1>
-  <p><a href="{{ url_for('texts.upload_form') }}">Upload a new text</a></p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 24px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; }
+    .btnrow { display:flex; gap:12px; margin: 20px 0; }
+    .card { border: 1px solid #ddd; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; }
+    .muted { font-size: 13px; color: #666; margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
 
-  {% if uploads %}
-    {% for item in uploads %}
-      <div class="card">
-        <h3>{{ item.title }}</h3>
-        <small>{{ item.created_at }}</small>
-        <pre style="white-space: pre-wrap;">{{ item.body }}</pre>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p>No uploads yet.</p>
-  {% endif %}
-{% endblock %}
+    <div class="topbar">
+      <h2 style="margin:0;">
+        Welcome, {{ user.username if user.username else user.email }}
+      </h2>
+
+      <a href="{{ url_for('user_controller.logout') }}">
+        <button type="button">Logout</button>
+      </a>
+    </div>
+
+    <hr>
+
+    <div class="btnrow">
+      <!-- If you don't have separate import/create pages yet, both can go to /upload -->
+      <a href="{{ url_for('text_controller.upload_page') }}">
+        <button type="button">Import text</button>
+      </a>
+
+      <a href="{{ url_for('text_controller.upload_page') }}">
+        <button type="button">Create text</button>
+      </a>
+    </div>
+
+    <hr>
+
+    <h3>Your texts</h3>
+
+    {% if texts and texts|length > 0 %}
+      {% for t in texts %}
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
+            <div>
+              <div style="font-weight:600;">
+                {{ t.title if t.title else "Untitled" }}
+              </div>
+
+              <div class="muted">
+                {% if t.created_at %}Created: {{ t.created_at }}{% endif %}
+                {% if t.content_size %} • Size: {{ t.content_size }} bytes{% endif %}
+              </div>
+            </div>
+
+            <div>
+              <a href="{{ url_for('text_controller.view_text', text_id=t.id) }}">
+                <button type="button">Open</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="color:#666;">No texts yet. Use “Import text” or “Create text”.</p>
+    {% endif %}
+
+  </div>
+</body>
+</html>
+
+
+
+
+</div>

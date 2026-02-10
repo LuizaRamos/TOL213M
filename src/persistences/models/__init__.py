@@ -1,2 +1,3 @@
-from .User import *
-from .Text import *
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()

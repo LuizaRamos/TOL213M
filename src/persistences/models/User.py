@@ -1,20 +1,30 @@
-from __future__ import annotations
 from datetime import datetime
-from src.services.UserAuthService import generate_phash, check_phash
-from src import db
+import os
+from argon2 import PasswordHasher
+from flask_login import UserMixin
+from src.persistences.models import db
 
-class User(db.Model):
-    __tablename__ = "user"
+ph = PasswordHasher()
+
+class User(UserMixin, db.Model):
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String, nullable=True)
-    last_name = db.Column(db.String, nullable=True)
-    email = db.Column(db.String(255), unique=True, nullable=False, index=True)
-    password_hash = db.Column(db.String(255), nullable=True)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    username = db.Column(db.String(120), unique=False, nullable=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    password_hash = db.Column(db.Text, nullable=False)
+
+    kdf_salt = db.Column(db.LargeBinary, nullable=False, default=lambda: os.urandom(16))
+
+    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
     def set_password(self, password: str) -> None:
-        self.password_hash = generate_phash(password)
+        self.password_hash = ph.hash(password)
 
     def check_password(self, password: str) -> bool:
-        return check_phash(self.password_hash, password)
+        try:
+            return ph.verify(self.password_hash, password)
+        except Exception:
+            return False

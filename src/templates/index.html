@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { text-align: center; }
+.form-container { display: inline-block; text-align: left; }
+.form-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 8px 0;
+}
+.form-row label {
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+}
+.buttons { margin-top: 15px; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>Login</h1>
+
+<!-- post to Flask endpoint -->
+<form method="post" action="{{ url_for('user_controller.login_submit') }}">
+    <div class="form-container">
+
+        <div class="form-row">
+            <label>Email:</label>
+            <input type="email" name="email" required />
+        </div>
+
+        <div class="form-row">
+            <label>Password:</label>
+            <input type="password" name="password" required />
+        </div>
+
+        <div class="buttons">
+            <button type="submit">Log in</button>
+            <br><br>
+            <button type="button"
+                    onclick="window.location.href='{{ url_for('user_controller.register_page') }}'">
+                Sign up
+            </button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
+
