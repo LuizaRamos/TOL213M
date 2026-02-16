@@ -16,7 +16,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-from app import create_app
+from src.app import create_app
 from src.persistences.models import db
 from src.persistences.models.User import User
 from src.persistences.models.Text import Text
