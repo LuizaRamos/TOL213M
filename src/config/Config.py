@@ -13,7 +13,14 @@ DEFAULT_DB_URI = f"sqlite:///{DEFAULT_DB_PATH}"
 class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-change-me")
 
-    SQLALCHEMY_DATABASE_URI = make_url(RENDER_EXTERNAL_URL)
+    uri = os.environ.get("DATABASE_URI", DEFAULT_DB_URI)
+
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql+psycopg://", 1)
+    elif uri.startswith("postgresql://"):
+        uri = uri.replace("postgresql://", "postgresql+psycopg://", 1)
+
+    SQLALCHEMY_DATABASE_URI = uri
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Flask-Session
