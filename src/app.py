@@ -11,7 +11,10 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    # Initialize DB first
     db.init_app(app)
+
+    app.config["SESSION_SQLALCHEMY"] = db
     Session(app)
 
     login_manager = LoginManager()
@@ -22,7 +25,7 @@ def create_app():
         from src.persistences.models.User import User
         from src.persistences.models.Text import Text
         from src.persistences.models.api_token import ApiToken
-        db.create_all()
+        #db.create_all()
 
     @login_manager.user_loader
     def load_user(user_id: str):
