@@ -4,7 +4,6 @@ import sys
 import os
 import time
 import csv
-import base64
 import random
 from pathlib import Path
 from typing import List, Tuple, Dict, Any
@@ -17,7 +16,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-from src.app import create_app
+from app import create_app
 from src.persistences.models import db
 from src.persistences.models.User import User
 from src.persistences.models.Text import Text
