@@ -6,6 +6,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/evaluation/src/Instance" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Instance" />
+      <excludeFolder url="file://$MODULE_DIR$/src/config/Instance" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.14 (TOL213M)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
