@@ -14,8 +14,20 @@ def create_app():
     # Initialize DB first
     db.init_app(app)
 
-    app.config["SESSION_SQLALCHEMY"] = db
-    Session(app)
+    # CONSOLIDATED SESSION SETUP
+    if app.config.get("SESSION_TYPE") == "sqlalchemy":
+        app.config["SESSION_SQLALCHEMY"] = db
+        app.config["SESSION_SQLALCHEMY_TABLE"] = "sessions"
+
+        # We use this check to prevent double-initialization during scripts
+        if "session" not in app.extensions:
+            try:
+                Session(app)
+            except Exception as e:
+                if "already defined" not in str(e):
+                    raise e
+    elif app.config.get("SESSION_TYPE"):
+        Session(app)
 
     login_manager = LoginManager()
     login_manager.login_view = "home_controller.index"
@@ -25,7 +37,7 @@ def create_app():
         from src.persistences.models.User import User
         from src.persistences.models.Text import Text
         from src.persistences.models.api_token import ApiToken
-        db.create_all()
+        #db.create_all()
 
     @login_manager.user_loader
     def load_user(user_id: str):
@@ -37,4 +49,3 @@ def create_app():
     app.register_blueprint(text_controller)
 
     return app
-app = create_app()
