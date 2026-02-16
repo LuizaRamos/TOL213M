@@ -37,7 +37,7 @@ def create_app():
         from src.persistences.models.User import User
         from src.persistences.models.Text import Text
         from src.persistences.models.api_token import ApiToken
-        # db.create_all() Should use the databases that have already been created
+        #db.create_all()
 
     @login_manager.user_loader
     def load_user(user_id: str):
@@ -50,4 +50,5 @@ def create_app():
 
     return app
 
-app = create_app()
+if __name__ == '__main__':
+    app = Flask(__name__)
