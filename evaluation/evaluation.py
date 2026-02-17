@@ -16,7 +16,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-from src.app import create_app
+from src.app import create_app, create_ssl_context
 from src.persistences.models import db
 from src.persistences.models.User import User
 from src.persistences.models.Text import Text
@@ -38,7 +38,7 @@ CRYPTO_REPEATS = 10
 
 RESULTS_DIR = PROJECT_ROOT / "evaluation"
 RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-CSV_PATH = RESULTS_DIR / "eval_metrics.csv"
+CSV_PATH = RESULTS_DIR / "eval_metrics_a5_2.csv"
 
 # Helpers: KDF / key derivation
 def derive_master_key(password: str, salt: bytes, iterations: int = PBKDF2_ITERS) -> bytes:
@@ -107,8 +107,6 @@ def make_text_of_exact_size(target_size: int, corpus: List[bytes], rng: random.R
     sample_bytes = build_sample_bytes(target_size, corpus, rng)
     return sample_bytes.decode("utf-8", errors="ignore")
 
-
-
 # Benchmark helpers
 def time_call(fn, repeats: int) -> float:
     t0 = time.perf_counter()
@@ -116,7 +114,6 @@ def time_call(fn, repeats: int) -> float:
         fn()
     t1 = time.perf_counter()
     return (t1 - t0) / repeats
-
 
 def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
     if not rows:
@@ -172,9 +169,6 @@ def main():
     # Force app to use eval DB
     os.environ["DATABASE_URL"] = f"sqlite:///{EVAL_DB_PATH.resolve()}"
 
-    # Create Flask app
-    app = create_app()
-
     # Load plaintext (NOT encrypted) from evaluation/text/
     text = load_text(TEXT_DIR)
     rng = random.Random(RANDOM_SEED)
@@ -191,6 +185,7 @@ def main():
     metrics_rows: List[Dict[str, Any]] = []
 
     app = create_app()
+    app.run(host="0.0.0.0", port=5000, ssl_context=create_ssl_context())
 
     with app.app_context():
         db.drop_all()

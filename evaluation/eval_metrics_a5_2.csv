@@ -1,0 +1,52 @@
+avg_seconds,category,notes,operation,size_bytes,username
+0.06389479200151982,auth,Argon2 password hashing during registration,set_password_hash,,eval_strong
+0.03693912499875296,auth,Argon2 password hashing during registration,set_password_hash,,eval_weak
+0.03362612499768147,auth,Argon2 password hashing during registration,set_password_hash,,populating0
+0.03394208400277421,auth,Argon2 password hashing during registration,set_password_hash,,populating1
+0.0335813749989029,auth,Argon2 password hashing during registration,set_password_hash,,populating2
+0.05719741040011286,auth,Argon2 verify averaged over 20 repeats,check_password_verify,,eval_strong
+0.04553524789989751,auth,Argon2 verify averaged over 20 repeats,check_password_verify,,eval_weak
+0.04566211250021297,auth,Argon2 verify averaged over 20 repeats,check_password_verify,,populating0
+0.055466208350117084,auth,Argon2 verify averaged over 20 repeats,check_password_verify,,populating1
+0.04618621664994862,auth,Argon2 verify averaged over 20 repeats,check_password_verify,,populating2
+0.8170920208001917,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1024,eval_strong
+0.03797492500016233,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1024,eval_strong
+0.7922608917004255,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,10240,eval_strong
+0.05501975000006496,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,10240,eval_strong
+0.8316640416000155,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,102417,eval_strong
+0.07456736249951064,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,102417,eval_strong
+1.6030049000000872,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1048853,eval_strong
+0.1728358375003154,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1048853,eval_strong
+0.752561862499715,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1024,eval_weak
+0.03785998329985887,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1024,eval_weak
+0.7679092708000098,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,10240,eval_weak
+0.05850541249965317,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,10240,eval_weak
+0.8066901124999276,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,102400,eval_weak
+0.05287842090037884,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,102400,eval_weak
+1.4307664249994558,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1048834,eval_weak
+0.16283606249999139,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1048834,eval_weak
+0.7531517625000561,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1024,populating0
+0.04435234580014367,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1024,populating0
+0.7570095541996125,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,10240,populating0
+0.03984619170005317,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,10240,populating0
+0.840506325000024,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,102437,populating0
+0.04234377079992555,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,102437,populating0
+1.4219605374993989,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1048849,populating0
+0.17099079170002368,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1048849,populating0
+0.7733970917004627,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1024,populating1
+0.043523504200129536,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1024,populating1
+0.7704983750001702,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,10240,populating1
+0.04030766659998335,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,10240,populating1
+0.8212131290994875,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,102437,populating1
+0.04277432079979917,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,102437,populating1
+1.3299404042001697,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1048869,populating1
+0.16393515829986427,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1048869,populating1
+0.7472208416002104,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1024,populating2
+0.03752209589947597,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1024,populating2
+0.7479405750003935,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,10240,populating2
+0.03918250830029137,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,10240,populating2
+0.8333664040997973,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,102400,populating2
+0.04879434590038727,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,102400,populating2
+1.516158083299524,crypto,AES-GCM encrypt+DB insert avg over 10 repeats,encrypt_store,1048867,populating2
+0.1906889999998384,crypto,AES-GCM decrypt+read avg over 10 repeats; correct=True,decrypt_read,1048867,populating2
+0.3588894159984193,attack,attempts=6 found=Password123 correct=True,bruteforce_storage_dictionary,1048834,eval_weak

@@ -27,3 +27,12 @@ class Config:
     # Flask-Session
     SESSION_TYPE = "sqlalchemy"
     SESSION_PERMANENT = False
+
+    # Cookie security flags
+    SESSION_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Lax"
+    SESSION_COOKIE_SECURE = True
+    REMEMBER_COOKIE_SECURE = True
+
+
